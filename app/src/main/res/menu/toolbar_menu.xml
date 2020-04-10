@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/group_menu" android:visible="true">
+        <item android:icon="@drawable/ic_search_black_24dp"
+            android:title="@string/app_name"
+            android:id="@+id/search_icon"
+            app:actionViewClass="android.widget.SearchView"
+            app:showAsAction="withText|always"/>
+    </group>
+</menu>

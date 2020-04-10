@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Ngerisep</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_wish">Wishlist</string>
+    <string name="title_profil">Profile</string>
+    <string name="populer_recipe">Popular Recipes</string>
+    <string name="category_label">Category</string>
+    <string name="fafvorite_label">Favorite Recipes</string>
+    <string name="recipes_text">Recipes</string>
+    <string name="ingredients_text">Ingredients</string>
+    <string name="instruction_text">Instructions</string>
+    <string name="watch_text">Watch Tutorial</string>
+    <string name="mark_text">Mark</string>
+    <string name="search_hint">Mo cari resep apa nich ?</string>
+</resources>
