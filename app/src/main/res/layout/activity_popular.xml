@@ -23,9 +23,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shape_roundRect_bottomRightRadius="30dp"
                 app:shape_roundRect_topLeftRadius="30dp">
-
                 <ImageView
                     android:id="@+id/img_dessert"
                     android:layout_width="match_parent"
@@ -58,10 +56,13 @@
 
             <TextView
                 android:id="@+id/det_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/category_dessert"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
                 tools:text="ini makanan" />
@@ -83,7 +84,7 @@
                 android:background="@drawable/bg_mini_rounded_category"
                 android:padding="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/det_name"
                 tools:text="Ayam Goyeng" />
 
             <View

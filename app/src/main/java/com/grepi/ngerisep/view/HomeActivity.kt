@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,8 +19,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.view.ui.activity.SearchActivity
+import kotlin.system.exitProcess
 
 class HomeActivity : AppCompatActivity() {
+
+    private var doublePress = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,6 @@ class HomeActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                setToast("Searching ${p0}...")
                 val mIntent = Intent(this@HomeActivity, SearchActivity::class.java)
                 mIntent.putExtra(SearchActivity.mObject, p0)
                 startActivity(mIntent)
@@ -59,6 +62,17 @@ class HomeActivity : AppCompatActivity() {
 
         })
         return true
+    }
+
+    override fun onBackPressed() {
+        if (doublePress) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doublePress = true
+        setToast("Tekan Lagi Untuk Keluar")
+        Handler().postDelayed(Runnable { doublePress = false }, 2000L)
     }
 
     private fun setToast(message : String) {

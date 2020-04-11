@@ -40,7 +40,12 @@ class SearchActivity : AppCompatActivity() {
         searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
         searchViewModel.fetchSearchFood(mData!!, this)
         searchViewModel.getSearchFood().observe(this, Observer {
-            searchAdapter.addItem(it)
+            if (!it.isNullOrEmpty()) {
+                img_notfound.visibility = View.GONE
+                searchAdapter.addItem(it)
+            }else {
+                img_notfound.visibility = View.VISIBLE
+            }
         })
         searchAdapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback{
             override fun onItemClicked(meal: Meal) {

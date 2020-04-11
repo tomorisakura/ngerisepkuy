@@ -2,6 +2,9 @@ package com.grepi.ngerisep.view.ui.activity
 
 import android.content.Context
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +13,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.GsonBuilder
 import com.grepi.ngerisep.model.FoodResponse
 import com.grepi.ngerisep.model.Meal
@@ -21,6 +25,7 @@ class SearchViewModel : ViewModel() {
     private lateinit var mealResponse : FoodResponse
     private val mealList = MutableLiveData<ArrayList<Meal>>()
     private val meal : ArrayList<Meal> = arrayListOf()
+
 
     internal fun fetchSearchFood(query : String, context: Context) {
         AndroidNetworking.get(Common.url_searchFood+query)
@@ -35,7 +40,7 @@ class SearchViewModel : ViewModel() {
                         }
                         mealList.postValue(meal)
                     } else {
-                        Toast.makeText(context, "Resep TidakDitemukan", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Resep tidak ditemukan", Toast.LENGTH_SHORT).show()
                     }
                 }
 

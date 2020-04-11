@@ -142,10 +142,6 @@ class PopularActivity : AppCompatActivity() {
         }
     }
 
-    private fun snackBar(message : String) {
-        Snackbar.make(cd_popular, message, Snackbar.LENGTH_INDEFINITE).show()
-    }
-
     private fun setToast(message : String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }

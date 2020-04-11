@@ -8,6 +8,15 @@
     android:id="@+id/act_search"
     tools:context=".view.ui.activity.SearchActivity">
 
+
+    <ImageView
+        android:id="@+id/img_notfound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/not_found"
+        android:visibility="invisible"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
