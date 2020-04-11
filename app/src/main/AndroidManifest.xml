@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/greviTheme">
-        <activity android:name=".view.ui.activity.SearchActivity"></activity>
-        <activity android:name=".view.ui.activity.PopularActivity" />
+        <activity android:name=".view.ui.activity.SearchActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.ui.activity.PopularActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".view.HomeActivity"
-            android:label="@string/title_activity_home" />
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

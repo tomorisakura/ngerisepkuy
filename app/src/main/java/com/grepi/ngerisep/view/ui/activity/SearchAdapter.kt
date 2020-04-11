@@ -47,8 +47,9 @@ class SearchAdapter(var meal : ArrayList<Meal>) : RecyclerView.Adapter<SearchAda
         fun bind(m : Meal) {
             with(itemView) {
                 Glide.with(itemView.context).load(m.strMealThumb).placeholder(R.drawable.ic_tomat_placeholder_xx).into(food_img_search)
-                itemView.name_food_search.text = m.strMeal
-                itemView.setOnClickListener { onItemClickCallback?.onItemClicked(m) }
+                name_food_search.text = m.strMeal
+                category_food_search.text = m.strCategory
+                setOnClickListener { onItemClickCallback?.onItemClicked(m) }
             }
         }
     }
