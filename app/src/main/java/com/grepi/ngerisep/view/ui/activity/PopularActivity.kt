@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Dessert
 import com.grepi.ngerisep.model.Meal
+import com.grepi.ngerisep.model.Miscellaneous
 import com.grepi.ngerisep.model.Seafod
 import com.grepi.ngerisep.view.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.activity_popular.*
@@ -24,6 +25,7 @@ class PopularActivity : AppCompatActivity() {
         const val mOBJECT = "food_object"
         const val mOBJECT_SEA = "food_sea"
         const val mObject_search = "object_search"
+        const val mObject_misce = "object_misce"
     }
 
     private lateinit var homeViewModel: HomeViewModel
@@ -46,6 +48,7 @@ class PopularActivity : AppCompatActivity() {
         val mItem = intent.getParcelableExtra<Dessert>(mOBJECT)
         val mItem2 = intent.getParcelableExtra<Seafod>(mOBJECT_SEA)
         val mSearch = intent.getParcelableExtra<Meal>(mObject_search)
+        val mMisce = intent.getParcelableExtra<Miscellaneous>(mObject_misce)
         when {
             mItem is Dessert -> {
                 supportActionBar?.title = mItem.strMeal
@@ -81,6 +84,22 @@ class PopularActivity : AppCompatActivity() {
                 supportActionBar?.title = mSearch.strMeal
                 homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
                 homeViewModel.fetchMealsbyId(mSearch.idMeal)
+                homeViewModel.getMealsById().observe(this, Observer {
+                    for (i in it.indices) {
+                        if (it.isEmpty()) {
+                            progress_popular.visibility = View.VISIBLE
+                        } else {
+                            progress_popular.visibility = View.GONE
+                            setDataDetail(it[i])
+                        }
+                    }
+                })
+            }
+
+            mMisce is Miscellaneous -> {
+                supportActionBar?.title = mMisce.strMeal
+                homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+                homeViewModel.fetchMealsbyId(mMisce.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
                         if (it.isEmpty()) {

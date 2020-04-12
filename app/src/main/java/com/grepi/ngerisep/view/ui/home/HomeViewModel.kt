@@ -25,9 +25,12 @@ class HomeViewModel : ViewModel() {
     lateinit var meals : FoodResponse
     lateinit var dessertResponse: DessertResponse
     lateinit var seafoodResponse : SeafoodResponse
+    lateinit var miscellaneousResponse: MiscellaneousResponse
+    var miscelaneous : ArrayList<Miscellaneous> = arrayListOf()
     var dessert : ArrayList<Dessert> = arrayListOf()
     var food : ArrayList<Meal> = arrayListOf()
     var seafod : ArrayList<Seafod> = arrayListOf()
+    var misceList = MutableLiveData<ArrayList<Miscellaneous>>()
     var mealsList = MutableLiveData<ArrayList<Meal>>()
     var seafoodList = MutableLiveData<ArrayList<Seafod>>()
     var dessertList = MutableLiveData<ArrayList<Dessert>>()
@@ -105,5 +108,28 @@ class HomeViewModel : ViewModel() {
 
     internal fun getMealsById() : LiveData<ArrayList<Meal>> {
         return mealsList
+    }
+
+    internal fun fetchMisceFood() {
+        AndroidNetworking.get(Common.url_misce)
+            .setPriority(Priority.LOW)
+            .build()
+            .getAsJSONObject(object : JSONObjectRequestListener{
+                override fun onResponse(response: JSONObject?) {
+                    miscellaneousResponse = GsonBuilder().create().fromJson(response.toString(), MiscellaneousResponse::class.java)
+                    miscellaneousResponse.meals.forEach {
+                        miscelaneous.add(it)
+                    }
+                    misceList.postValue(miscelaneous)
+                }
+
+                override fun onError(anError: ANError?) {
+                    Log.e("_responseMisce", anError.toString())
+                }
+            })
+    }
+
+    internal fun getMisceFood() : LiveData<ArrayList<Miscellaneous>> {
+        return misceList
     }
 }

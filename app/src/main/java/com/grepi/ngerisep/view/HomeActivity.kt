@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
 
         this.doublePress = true
         setToast("Tekan Lagi Untuk Keluar")
-        Handler().postDelayed(Runnable { doublePress = false }, 2000L)
+        Handler().postDelayed({ doublePress = false }, 2000L)
     }
 
     private fun setToast(message : String) {

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Dessert
+import com.grepi.ngerisep.model.Miscellaneous
 import com.grepi.ngerisep.model.Seafod
 import com.grepi.ngerisep.view.ui.activity.PopularActivity
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -21,8 +22,10 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeAdapter : HomeAdapter
     private lateinit var footerAdapter: FooterAdapter
+    private lateinit var miscellaneousAdapter: MiscellaneousAdapter
     private var seafood : ArrayList<Seafod> = arrayListOf()
     private var dessert : ArrayList<Dessert> = arrayListOf()
+    private var misce : ArrayList<Miscellaneous> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +41,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         createRecyclerView()
         createRecyclerFooter()
+        createMisceRecyclerView()
     }
 
     private fun createRecyclerView() {
@@ -78,6 +82,30 @@ class HomeFragment : Fragment() {
             }
 
         })
+    }
+
+    private fun createMisceRecyclerView() {
+        rv_missce.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+        miscellaneousAdapter = MiscellaneousAdapter(misce)
+        rv_missce.adapter = miscellaneousAdapter
+        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        homeViewModel.fetchMisceFood()
+        homeViewModel.getMisceFood().observe(this.viewLifecycleOwner, Observer {
+            miscellaneousAdapter.addMisce(it)
+        })
+
+        miscellaneousAdapter.setOnCLickItem(object : MiscellaneousAdapter.OnItemCLickCallBack {
+            override fun onItemClicked(misce: Miscellaneous) {
+                prepareMisceFood(misce)
+            }
+
+        })
+    }
+
+    private fun prepareMisceFood(miscellaneous: Miscellaneous) {
+        val mIntent = Intent(activity, PopularActivity::class.java)
+        mIntent.putExtra(PopularActivity.mObject_misce, miscellaneous)
+        startActivity(mIntent)
     }
 
     private fun preparePopularFood(m : Dessert) {
