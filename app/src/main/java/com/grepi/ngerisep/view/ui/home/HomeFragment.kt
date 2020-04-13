@@ -15,9 +15,11 @@ import com.grepi.ngerisep.model.Dessert
 import com.grepi.ngerisep.model.Miscellaneous
 import com.grepi.ngerisep.model.Seafod
 import com.grepi.ngerisep.view.ui.activity.PopularActivity
+import com.grepi.ngerisep.view.ui.category.CategoryActivity
+import kotlinx.android.synthetic.main.category_item.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
 
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeAdapter : HomeAdapter
@@ -42,6 +44,19 @@ class HomeFragment : Fragment() {
         createRecyclerView()
         createRecyclerFooter()
         createMisceRecyclerView()
+        prepareButtonCategory()
+    }
+
+    private fun prepareButtonCategory() {
+        cat_meat.setOnClickListener(this)
+        cat_vegetarian.setOnClickListener(this)
+        cat_breakfast.setOnClickListener(this)
+        cat_chicken.setOnClickListener(this)
+        cat_side.setOnClickListener(this)
+        cat_starter.setOnClickListener(this)
+        cat_lamb.setOnClickListener(this)
+        cat_vegan.setOnClickListener(this)
+        cat_pasta.setOnClickListener(this)
     }
 
     private fun createRecyclerView() {
@@ -130,5 +145,62 @@ class HomeFragment : Fragment() {
         shimmer_banner.stopShimmerAnimation()
         shimmer_banner_footer.stopShimmerAnimation()
         super.onPause()
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id) {
+            R.id.cat_meat -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_meat, "Beef")
+                startActivity(mIntent)
+            }
+            R.id.cat_vegetarian -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_vegetarian, "Vegetarian")
+                startActivity(mIntent)
+            }
+
+            R.id.cat_breakfast -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_breakfast, "Breakfast")
+                startActivity(mIntent)
+            }
+
+            R.id.cat_chicken -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_chicken, "Chicken")
+                startActivity(mIntent)
+            }
+
+            R.id.cat_side -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_side, "Side")
+                startActivity(mIntent)
+            }
+
+            R.id.cat_starter -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_starter, "Starter")
+                startActivity(mIntent)
+            }
+
+            R.id.cat_lamb -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_lamb, "Lamb")
+                startActivity(mIntent)
+            }
+
+            R.id.cat_vegan -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_vegan, "Vegan")
+                startActivity(mIntent)
+            }
+
+            R.id.cat_pasta -> {
+                val mIntent = Intent(activity, CategoryActivity::class.java)
+                mIntent.putExtra(CategoryActivity.mObject_pasta, "Pasta")
+                startActivity(mIntent)
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 <HorizontalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -13,39 +14,194 @@
         android:padding="20dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_sayurr" />
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_vegetarian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_sayurr" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Vegetarian"/>
+        </LinearLayout>
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_daging" />
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_meat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_daging" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Beef"/>
+        </LinearLayout>
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_tirotii" />
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_breakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_sarapann" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Breakfast"/>
+        </LinearLayout>
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_tacoos" />
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_chicken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_tacoos" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Chicken"/>
+        </LinearLayout>
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_kejuu" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_side"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_kejuu" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Side"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_starter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_miscelaneus"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Starter"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_lamb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_lamb"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Lamb"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_vegan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_vegan"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Vegan"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/cat_pasta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_pastaa"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="Pasta"/>
+        </LinearLayout>
 
     </LinearLayout>
 

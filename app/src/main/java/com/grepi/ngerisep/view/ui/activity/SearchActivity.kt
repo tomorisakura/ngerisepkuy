@@ -25,7 +25,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        var mData = intent.getSerializableExtra(mObject)
+        val mData = intent.getSerializableExtra(mObject)
         supportActionBar?.title = "Searching '${mData}'"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupTheme()
