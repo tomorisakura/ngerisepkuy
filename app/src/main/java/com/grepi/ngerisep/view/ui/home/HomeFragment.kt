@@ -14,7 +14,7 @@ import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Dessert
 import com.grepi.ngerisep.model.Miscellaneous
 import com.grepi.ngerisep.model.Seafod
-import com.grepi.ngerisep.view.ui.activity.PopularActivity
+import com.grepi.ngerisep.view.ui.activity.DetailsActivity
 import com.grepi.ngerisep.view.ui.category.CategoryActivity
 import kotlinx.android.synthetic.main.category_item.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -118,20 +118,20 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun prepareMisceFood(miscellaneous: Miscellaneous) {
-        val mIntent = Intent(activity, PopularActivity::class.java)
-        mIntent.putExtra(PopularActivity.mObject_misce, miscellaneous)
+        val mIntent = Intent(activity, DetailsActivity::class.java)
+        mIntent.putExtra(DetailsActivity.mObject_misce, miscellaneous)
         startActivity(mIntent)
     }
 
     private fun preparePopularFood(m : Dessert) {
-        val mIntent = Intent(activity, PopularActivity::class.java)
-        mIntent.putExtra(PopularActivity.mOBJECT, m)
+        val mIntent = Intent(activity, DetailsActivity::class.java)
+        mIntent.putExtra(DetailsActivity.mOBJECT, m)
         startActivity(mIntent)
     }
 
     private fun prepareFooterMenu(sea : Seafod) {
-        val mIntent = Intent(activity, PopularActivity::class.java)
-        mIntent.putExtra(PopularActivity.mOBJECT_SEA, sea)
+        val mIntent = Intent(activity, DetailsActivity::class.java)
+        mIntent.putExtra(DetailsActivity.mOBJECT_SEA, sea)
         startActivity(mIntent)
     }
 

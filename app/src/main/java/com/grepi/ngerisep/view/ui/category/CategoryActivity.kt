@@ -1,5 +1,6 @@
 package com.grepi.ngerisep.view.ui.category
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.grepi.ngerisep.R
+import com.grepi.ngerisep.model.CategoryFood
 import com.grepi.ngerisep.model.Seafod
+import com.grepi.ngerisep.view.ui.activity.DetailsActivity
 import com.grepi.ngerisep.view.ui.activity.SearchViewModel
 import kotlinx.android.synthetic.main.activity_category.*
 
@@ -50,7 +53,7 @@ class CategoryActivity : AppCompatActivity() {
         val mPasta = intent.getStringExtra(mObject_pasta)
         when {
             mBeef is String -> {
-                supportActionBar?.title = "Category '${mBeef}'"
+                supportActionBar?.title = mBeef
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mBeef)
@@ -58,10 +61,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mVege is String -> {
-                supportActionBar?.title = "Category '${mVege}'"
+                supportActionBar?.title = mVege
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mVege)
@@ -69,10 +78,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mBreakfast is String -> {
-                supportActionBar?.title = "Category '${mBreakfast}'"
+                supportActionBar?.title = mBreakfast
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mBreakfast)
@@ -80,10 +95,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mChicken is String -> {
-                supportActionBar?.title = "Category '${mChicken}'"
+                supportActionBar?.title = mChicken
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mChicken)
@@ -91,10 +112,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mSide is String -> {
-                supportActionBar?.title = "Category '${mSide}'"
+                supportActionBar?.title = mSide
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mSide)
@@ -102,10 +129,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mStarter is String -> {
-                supportActionBar?.title = "Category '${mStarter}'"
+                supportActionBar?.title = mStarter
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mStarter)
@@ -113,10 +146,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mLamb is String -> {
-                supportActionBar?.title = "Category '${mLamb}'"
+                supportActionBar?.title = mLamb
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mLamb)
@@ -124,10 +163,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mVegan is String -> {
-                supportActionBar?.title = "Category '${mVegan}'"
+                supportActionBar?.title = mVegan
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mVegan)
@@ -135,10 +180,16 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
             mPasta is String -> {
-                supportActionBar?.title = "Category '${mPasta}'"
+                supportActionBar?.title = mPasta
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
                 categoryViewModel.fetchCategoryFood(mPasta)
@@ -146,9 +197,21 @@ class CategoryActivity : AppCompatActivity() {
                     progress_category.visibility = View.GONE
                     categoryAdapter = CategoryAdapter(it)
                     rv_category.adapter = categoryAdapter
+
+                    categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
+                        override fun onItemClicked(mFood: CategoryFood) {
+                            prepareDetailsFood(mFood)
+                        }
+                    })
                 })
             }
         }
+    }
+
+    private fun prepareDetailsFood(mFood : CategoryFood) {
+        val mIntent = Intent(this, DetailsActivity::class.java)
+        mIntent.putExtra(DetailsActivity.mObject_category, mFood)
+        startActivity(mIntent)
     }
 
     override fun onSupportNavigateUp(): Boolean {

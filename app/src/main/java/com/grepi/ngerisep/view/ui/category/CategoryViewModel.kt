@@ -9,17 +9,15 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.google.gson.GsonBuilder
-import com.grepi.ngerisep.model.FoodResponse
-import com.grepi.ngerisep.model.Seafod
-import com.grepi.ngerisep.model.SeafoodResponse
+import com.grepi.ngerisep.model.*
 import com.grepi.ngerisep.static.Common
 import org.json.JSONObject
 
 class CategoryViewModel : ViewModel() {
 
-    private lateinit var mFoodResponse : SeafoodResponse
-    private var mFood : ArrayList<Seafod> = arrayListOf()
-    private var mFoodList = MutableLiveData<ArrayList<Seafod>>()
+    private lateinit var mFoodResponse : CategoryFoodResponse
+    private var mFood : ArrayList<CategoryFood> = arrayListOf()
+    private var mFoodList = MutableLiveData<ArrayList<CategoryFood>>()
 
     internal fun fetchCategoryFood(query : String) {
         AndroidNetworking.get(Common.url_category+query)
@@ -27,7 +25,7 @@ class CategoryViewModel : ViewModel() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener{
                 override fun onResponse(response: JSONObject?) {
-                    mFoodResponse = GsonBuilder().create().fromJson(response.toString(), SeafoodResponse::class.java)
+                    mFoodResponse = GsonBuilder().create().fromJson(response.toString(), CategoryFoodResponse::class.java)
                     mFoodResponse.meals.forEach {
                         mFood.add(it)
                     }
@@ -41,7 +39,7 @@ class CategoryViewModel : ViewModel() {
             })
     }
 
-    internal fun getCategoryFood() : LiveData<ArrayList<Seafod>> {
+    internal fun getCategoryFood() : LiveData<ArrayList<CategoryFood>> {
         return mFoodList
     }
 }

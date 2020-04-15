@@ -16,7 +16,7 @@
             android:name=".view.ui.activity.SearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.ui.activity.PopularActivity"
+            android:name=".view.ui.activity.DetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.HomeActivity"

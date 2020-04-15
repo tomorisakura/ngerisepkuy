@@ -56,8 +56,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun foodDetails(meal : Meal) {
-        val mIntent = Intent(this, PopularActivity::class.java)
-        mIntent.putExtra(PopularActivity.mObject_search, meal)
+        val mIntent = Intent(this, DetailsActivity::class.java)
+        mIntent.putExtra(DetailsActivity.mObject_search, meal)
         startActivity(mIntent)
     }
 
