@@ -15,7 +15,7 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.grepi.ngerisep.view.ui.wishlist.MarkFragment"
         android:label="@string/title_wish"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_mark" />
 
     <fragment
         android:id="@+id/navigation_notifications"

@@ -1,6 +1,7 @@
 package com.grepi.ngerisep.db
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -11,7 +12,7 @@ import com.grepi.ngerisep.entity.MealsMark
 interface MealsDAO {
 
     @Query("SELECT * FROM mealsTable")
-    fun getAllMeals() : LiveData<List<MealsMark>>
+    fun getAllMeals() : List<MealsMark>
 
     @Query("SELECT * FROM mealsTable WHERE idMeal IN (:mealsId)")
     fun getMealsById(mealsId : String) : List<MealsMark>

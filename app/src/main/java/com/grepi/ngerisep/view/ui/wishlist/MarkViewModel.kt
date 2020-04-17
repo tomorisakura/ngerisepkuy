@@ -1,19 +1,15 @@
 package com.grepi.ngerisep.view.ui.wishlist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.*
 import com.grepi.ngerisep.Repository
 import com.grepi.ngerisep.db.MealsDatabase
 import com.grepi.ngerisep.entity.MealsMark
+import com.grepi.ngerisep.model.Meal
 import kotlinx.coroutines.launch
+import java.sql.Array
 
-class MarkViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is wishlist Fragment"
-    }
-    val text: LiveData<String> = _text
+class MarkViewModel(application: Application) : AndroidViewModel(application) {
 
 }
