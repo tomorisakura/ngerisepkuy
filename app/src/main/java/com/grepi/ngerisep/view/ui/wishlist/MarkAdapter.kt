@@ -9,7 +9,7 @@ import com.grepi.ngerisep.R
 import com.grepi.ngerisep.entity.MealsMark
 import kotlinx.android.synthetic.main.list_item_mark.view.*
 
-class MarkAdapter(private val foodMark : ArrayList<MealsMark>) : RecyclerView.Adapter<MarkAdapter.MarkViewHolder>() {
+class MarkAdapter(private val foodMark : List<MealsMark>) : RecyclerView.Adapter<MarkAdapter.MarkViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarkAdapter.MarkViewHolder {
         val mView = LayoutInflater.from(parent.context).inflate(R.layout.list_item_mark, parent, false)
         return MarkViewHolder(mView)
@@ -29,7 +29,7 @@ class MarkAdapter(private val foodMark : ArrayList<MealsMark>) : RecyclerView.Ad
                 Glide.with(this.context).load(meals.strMealThumb).into(mark_img)
                 mark_name.text = meals.strMeal
                 mark_category.text = meals.strCategory
-                mark_area.text = meals.strArea
+                mark_area.text = "\uD83D\uDEA9 ${meals.strArea} Food"
             }
         }
     }

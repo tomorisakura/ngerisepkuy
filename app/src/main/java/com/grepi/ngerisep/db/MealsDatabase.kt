@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.grepi.ngerisep.entity.MealsMark
 
-@Database(entities = arrayOf(MealsMark::class), version = 1, exportSchema = false)
+@Database(entities = [MealsMark::class], version = 1, exportSchema = false)
 abstract class MealsDatabase : RoomDatabase() {
     abstract fun mealsMarkDAO() : MealsDAO
 
@@ -16,7 +16,7 @@ abstract class MealsDatabase : RoomDatabase() {
         fun getInstance(context: Context) : MealsDatabase {
             if (INSTANCE == null) {
                 synchronized(MealsDatabase::class.java) {
-                    INSTANCE = Room.databaseBuilder(context, MealsDatabase::class.java, "mealsTable").allowMainThreadQueries().build()
+                    INSTANCE = Room.databaseBuilder(context, MealsDatabase::class.java, "mealsTable").build()
                 }
             }
             return INSTANCE as MealsDatabase

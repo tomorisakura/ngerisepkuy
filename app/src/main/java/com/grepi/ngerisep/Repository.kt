@@ -21,10 +21,19 @@ import kotlinx.coroutines.*
 import org.json.JSONObject
 import kotlin.coroutines.CoroutineContext
 
-class Repository {
+class Repository(private val context: Context) {
 
-    suspend fun addMeals(context : Context, mealsMark: MealsMark) = coroutineScope{
-        val insertMeals = async { MealsDatabase.getInstance(context).mealsMarkDAO().insertAll(mealsMark) }
-        insertMeals.await()
+    private var mealsDAO: MealsDAO = MealsDatabase.getInstance(context).mealsMarkDAO()
+    private val mealList : LiveData<List<MealsMark>> =mealsDAO.getAllMeals()
+
+    fun addMeals(mealsMark: MealsMark) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val insertMeals = async { MealsDatabase.getInstance(context).mealsMarkDAO().insertAll(mealsMark) }
+            insertMeals.await()
+        }
+    }
+
+    fun getMeals() : LiveData<List<MealsMark>> {
+        return mealList
     }
 }

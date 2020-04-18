@@ -12,7 +12,7 @@ import com.grepi.ngerisep.entity.MealsMark
 interface MealsDAO {
 
     @Query("SELECT * FROM mealsTable")
-    fun getAllMeals() : List<MealsMark>
+    fun getAllMeals() : LiveData<List<MealsMark>>
 
     @Query("SELECT * FROM mealsTable WHERE idMeal IN (:mealsId)")
     fun getMealsById(mealsId : String) : List<MealsMark>

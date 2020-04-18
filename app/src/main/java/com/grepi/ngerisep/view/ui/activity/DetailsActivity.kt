@@ -16,6 +16,7 @@ import com.grepi.ngerisep.db.MealsDatabase
 import com.grepi.ngerisep.entity.MealsMark
 import com.grepi.ngerisep.model.*
 import com.grepi.ngerisep.view.ui.home.HomeViewModel
+import com.grepi.ngerisep.view.ui.wishlist.MarkViewModel
 import kotlinx.android.synthetic.main.activity_popular.*
 import kotlinx.coroutines.*
 
@@ -27,12 +28,12 @@ class DetailsActivity : AppCompatActivity() {
         const val mObject_search = "object_search"
         const val mObject_misce = "object_misce"
         const val mObject_category = "object_category"
-        const val mObject_meals = "object_meals"
     }
 
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var repository: Repository
+    private lateinit var markViewModel: MarkViewModel
     private lateinit var mealsMark: MealsMark
+    private lateinit var repository : Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -180,12 +181,10 @@ class DetailsActivity : AppCompatActivity() {
 
         mark_food.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
-                val toast = async { setToast("Fiturnya blom tak buat ${meal.strMeal}") }
+                val toast = async { setToast("Marked ${meal.strMeal}") }
                 toast.await()
-
-                val insertDatas = async { insertMeal(meal) }
-                insertDatas.await()
             }
+            insertMeal(meal)
         }
     }
 
@@ -243,9 +242,9 @@ class DetailsActivity : AppCompatActivity() {
             strSource = meal.strSource,
             dateModifed = meal.dateModifed
         )
-        GlobalScope.launch(Dispatchers.IO) {
-            MealsDatabase.getInstance(this@DetailsActivity).mealsMarkDAO().insertAll(mealsMark)
-        }
+
+        markViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(MarkViewModel::class.java)
+        markViewModel.insert(mealsMark)
     }
 
     private fun setToast(message : String) {
@@ -253,7 +252,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun setupTheme() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     }
