@@ -10,8 +10,9 @@ import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Miscellaneous
 import kotlinx.android.synthetic.main.list_item_misscellaneous.view.*
 
-class MiscellaneousAdapter(var missce : ArrayList<Miscellaneous>) : RecyclerView.Adapter<MiscellaneousAdapter.MiscellaneousViewHolder>() {
+class MiscellaneousAdapter : RecyclerView.Adapter<MiscellaneousAdapter.MiscellaneousViewHolder>() {
 
+    private var missce : ArrayList<Miscellaneous> = arrayListOf()
     private var onItemClickCallBack : OnItemCLickCallBack? = null
 
     interface OnItemCLickCallBack {
@@ -50,7 +51,7 @@ class MiscellaneousAdapter(var missce : ArrayList<Miscellaneous>) : RecyclerView
     inner class MiscellaneousViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         fun bind(misce : Miscellaneous) {
             with(itemView) {
-                Glide.with(context).load(misce.strMealThumb).placeholder(R.drawable.ic_tomat_placeholder_xx).into(food_img_missce)
+                Glide.with(context).load(misce.strMealThumb).placeholder(R.drawable.tomato_placeholder).into(food_img_missce)
                 name_food_missce.text = misce.strMeal
                 setOnClickListener { onItemClickCallBack?.onItemClicked(misce) }
             }

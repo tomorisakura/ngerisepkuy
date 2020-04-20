@@ -9,9 +9,10 @@ import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Seafod
 import kotlinx.android.synthetic.main.list_item_footer.view.*
 
-class FooterAdapter(var seafood : ArrayList<Seafod>) : RecyclerView.Adapter<FooterAdapter.FooterViewHolder>() {
+class FooterAdapter : RecyclerView.Adapter<FooterAdapter.FooterViewHolder>() {
 
-    internal var onItemClickCallBack : OnItemClickCallback? = null
+    private var seafood : ArrayList<Seafod> = arrayListOf()
+    private var onItemClickCallBack : OnItemClickCallback? = null
 
     interface OnItemClickCallback {
         fun onItemClicked(seafood : Seafod)
@@ -46,7 +47,7 @@ class FooterAdapter(var seafood : ArrayList<Seafod>) : RecyclerView.Adapter<Foot
     inner class FooterViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         fun bind(mFood : Seafod) {
             with(itemView) {
-                Glide.with(itemView.context).load(mFood.strMealThumb).placeholder(R.drawable.ic_tomat_placeholder_xx).into(food_img_f1)
+                Glide.with(itemView.context).load(mFood.strMealThumb).placeholder(R.drawable.tomato_placeholder).into(food_img_f1)
                 itemView.name_food_f1.text = mFood.strMeal
                 itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(mFood) }
             }

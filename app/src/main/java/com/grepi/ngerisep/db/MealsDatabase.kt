@@ -16,7 +16,9 @@ abstract class MealsDatabase : RoomDatabase() {
         fun getInstance(context: Context) : MealsDatabase {
             if (INSTANCE == null) {
                 synchronized(MealsDatabase::class.java) {
-                    INSTANCE = Room.databaseBuilder(context, MealsDatabase::class.java, "mealsTable").build()
+                    INSTANCE = Room.databaseBuilder(context, MealsDatabase::class.java, "mealsTable")
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             return INSTANCE as MealsDatabase

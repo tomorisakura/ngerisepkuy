@@ -5,15 +5,12 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.CategoryFood
-import com.grepi.ngerisep.model.Seafod
 import com.grepi.ngerisep.view.ui.activity.DetailsActivity
-import com.grepi.ngerisep.view.ui.activity.SearchViewModel
 import kotlinx.android.synthetic.main.activity_category.*
 
 class CategoryActivity : AppCompatActivity() {

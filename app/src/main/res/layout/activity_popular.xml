@@ -5,7 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cd_popular"
+    android:id="@+id/details_cordinator"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentStart="true"
     tools:context=".view.ui.activity.DetailsActivity">
 
     <ScrollView
@@ -415,12 +418,12 @@
                 app:layout_constraintGuide_begin="205dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
         android:padding="10dp"
+        android:id="@+id/bottom_bar_details"
         android:background="@color/colorWhite"
         android:orientation="horizontal"
         android:layout_gravity="bottom">
@@ -433,7 +436,8 @@
             android:background="@drawable/bg_button_watch"
             android:textColor="@color/colorWhite"
             android:textAllCaps="false"
-            android:text="@string/watch_text"/>
+            android:text="@string/watch_text"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/mark_food"
@@ -442,7 +446,8 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/bg_button_mark"
             android:textAllCaps="false"
-            android:text="@string/mark_text"/>
+            android:text="@string/mark_text"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

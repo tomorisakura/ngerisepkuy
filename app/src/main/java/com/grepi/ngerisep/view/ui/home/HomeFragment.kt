@@ -22,12 +22,9 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment(), View.OnClickListener {
 
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var homeAdapter : HomeAdapter
-    private lateinit var footerAdapter: FooterAdapter
-    private lateinit var miscellaneousAdapter: MiscellaneousAdapter
-    private var seafood : ArrayList<Seafod> = arrayListOf()
-    private var dessert : ArrayList<Dessert> = arrayListOf()
-    private var misce : ArrayList<Miscellaneous> = arrayListOf()
+    private var homeAdapter : HomeAdapter = HomeAdapter()
+    private var footerAdapter: FooterAdapter = FooterAdapter()
+    private var miscellaneousAdapter: MiscellaneousAdapter = MiscellaneousAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +58,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun createRecyclerView() {
         rv_item_banner.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        homeAdapter = HomeAdapter(dessert)
         rv_item_banner.adapter = homeAdapter
         homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
         homeViewModel.fetchData()
@@ -81,7 +77,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun createRecyclerFooter() {
         rv_footer.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        footerAdapter = FooterAdapter(seafood)
         rv_footer.adapter = footerAdapter
         homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
         homeViewModel.fetchSeafood()
@@ -101,7 +96,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun createMisceRecyclerView() {
         rv_missce.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        miscellaneousAdapter = MiscellaneousAdapter(misce)
         rv_missce.adapter = miscellaneousAdapter
         homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
         homeViewModel.fetchMisceFood()

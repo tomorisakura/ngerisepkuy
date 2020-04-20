@@ -16,4 +16,5 @@
     <string name="mark_text">Mark</string>
     <string name="search_hint">Mo cari resep apa nich ?</string>
     <string name="misscellaneous_text">Miscellaneous Food</string>
+    <string name="empty_text">Aww kamu belum menambahkan resep</string>
 </resources>

@@ -1,24 +1,22 @@
 package com.grepi.ngerisep.view.ui.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.grepi.ngerisep.R
-import com.grepi.ngerisep.Repository
-import com.grepi.ngerisep.db.MealsDatabase
 import com.grepi.ngerisep.entity.MealsMark
 import com.grepi.ngerisep.model.*
 import com.grepi.ngerisep.view.ui.home.HomeViewModel
 import com.grepi.ngerisep.view.ui.wishlist.MarkViewModel
 import kotlinx.android.synthetic.main.activity_popular.*
-import kotlinx.coroutines.*
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -28,12 +26,12 @@ class DetailsActivity : AppCompatActivity() {
         const val mObject_search = "object_search"
         const val mObject_misce = "object_misce"
         const val mObject_category = "object_category"
+        const val mKey_entity = "key"
     }
 
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var markViewModel: MarkViewModel
     private lateinit var mealsMark: MealsMark
-    private lateinit var repository : Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +53,11 @@ class DetailsActivity : AppCompatActivity() {
         val mSearch = intent.getParcelableExtra<Meal>(mObject_search)
         val mMisce = intent.getParcelableExtra<Miscellaneous>(mObject_misce)
         val mCategory = intent.getParcelableExtra<CategoryFood>(mObject_category)
+        val mKey = intent.getParcelableExtra<MealsMark>(mKey_entity)
+        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
         when {
             mItem is Dessert -> {
                 supportActionBar?.title = mItem.strMeal
-                homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
                 homeViewModel.fetchMealsbyId(mItem.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     if (it.isEmpty()) {
@@ -67,13 +66,13 @@ class DetailsActivity : AppCompatActivity() {
                         progress_popular.visibility = View.GONE
                         for (i in it.indices) {
                             setDataDetail(it[i])
+                            isMarked(it[i])
                         }
                     }
                 })
             }
             mItem2 is Seafod -> {
                 supportActionBar?.title = mItem2.strMeal
-                homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
                 homeViewModel.fetchMealsbyId(mItem2.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -82,13 +81,13 @@ class DetailsActivity : AppCompatActivity() {
                         } else {
                             progress_popular.visibility = View.GONE
                             setDataDetail(it[i])
+                            isMarked(it[i])
                         }
                     }
                 })
             }
             mSearch is Meal -> {
                 supportActionBar?.title = mSearch.strMeal
-                homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
                 homeViewModel.fetchMealsbyId(mSearch.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -97,6 +96,7 @@ class DetailsActivity : AppCompatActivity() {
                         } else {
                             progress_popular.visibility = View.GONE
                             setDataDetail(it[i])
+                            isMarked(it[i])
                         }
                     }
                 })
@@ -104,7 +104,6 @@ class DetailsActivity : AppCompatActivity() {
 
             mMisce is Miscellaneous -> {
                 supportActionBar?.title = mMisce.strMeal
-                homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
                 homeViewModel.fetchMealsbyId(mMisce.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -113,6 +112,7 @@ class DetailsActivity : AppCompatActivity() {
                         } else {
                             progress_popular.visibility = View.GONE
                             setDataDetail(it[i])
+                            isMarked(it[i])
                         }
                     }
                 })
@@ -120,7 +120,6 @@ class DetailsActivity : AppCompatActivity() {
 
             mCategory is CategoryFood -> {
                 supportActionBar?.title = mCategory.strMeal
-                homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
                 homeViewModel.fetchMealsbyId(mCategory.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -129,12 +128,31 @@ class DetailsActivity : AppCompatActivity() {
                         } else {
                             progress_popular.visibility = View.GONE
                             setDataDetail(it[i])
+                            isMarked(it[i])
+                        }
+                    }
+                })
+            }
+
+            mKey is MealsMark -> {
+                supportActionBar?.title = mKey.strMeal
+                homeViewModel.fetchMealsbyId(mKey.idMeal.toString())
+                homeViewModel.getMealsById().observe(this, Observer {
+                    for (i in it.indices) {
+                        if (it.isEmpty()) {
+                            progress_popular.visibility = View.VISIBLE
+                        } else {
+                            progress_popular.visibility = View.GONE
+                            setDataDetail(it[i])
+                            isMarked(it[i])
                         }
                     }
                 })
             }
         }
     }
+
+    private fun markViewModel() = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(MarkViewModel::class.java)
 
     private fun setDataDetail(meal: Meal) {
         Glide.with(this).load(meal.strMealThumb).into(img_dessert)
@@ -180,75 +198,46 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         mark_food.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
-                val toast = async { setToast("Marked ${meal.strMeal}") }
-                toast.await()
-            }
             insertMeal(meal)
         }
     }
 
     private fun insertMeal(meal: Meal) {
         mealsMark = MealsMark(
-            idMeal = meal.idMeal!!.toDouble(),
+            idMeal = meal.idMeal!!.toInt(),
             strMeal = meal.strMeal,
-            strDrinkAlternate = meal.strDrinkAlternate,
             strCategory = meal.strCategory,
             strArea = meal.strArea,
-            strInstructions = meal.strInstructions,
-            strMealThumb = meal.strMealThumb,
-            strTags = meal.strTags,
-            strYoutube = meal.strYoutube,
-            strIngredient1 = meal.strIngredient1,
-            strIngredient2 = meal.strIngredient2,
-            strIngredient3 = meal.strIngredient3,
-            strIngredient4 = meal.strIngredient4,
-            strIngredient5 = meal.strIngredient5,
-            strIngredient6 = meal.strIngredient6,
-            strIngredient7 = meal.strIngredient7,
-            strIngredient8 = meal.strIngredient8,
-            strIngredient9 = meal.strIngredient9,
-            strIngredient10 = meal.strIngredient10,
-            strIngredient11 = meal.strIngredient11,
-            strIngredient12 = meal.strIngredient12,
-            strIngredient13 = meal.strIngredient13,
-            strIngredient14 = meal.strIngredient14,
-            strIngredient15 = meal.strIngredient15,
-            strIngredient16 = meal.strIngredient16,
-            strIngredient17 = meal.strIngredient17,
-            strIngredient18 = meal.strIngredient18,
-            strIngredient19 = meal.strIngredient19,
-            strIngredient20 = meal.strIngredient20,
-            strMeasure1 = meal.strMeasure1,
-            strMeasure2 = meal.strMeasure2,
-            strMeasure3 = meal.strMeasure3,
-            strMeasure4 = meal.strMeasure4,
-            strMeasure5 = meal.strMeasure5,
-            strMeasure6 = meal.strMeasure6,
-            strMeasure7 = meal.strMeasure7,
-            strMeasure8 = meal.strMeasure8,
-            strMeasure9 = meal.strMeasure9,
-            strMeasure10 = meal.strMeasure10,
-            strMeasure11 = meal.strMeasure11,
-            strMeasure12 = meal.strMeasure12,
-            strMeasure13 = meal.strMeasure13,
-            strMeasure14 = meal.strMeasure14,
-            strMeasure15 = meal.strMeasure15,
-            strMeasure16 = meal.strMeasure16,
-            strMeasure17 = meal.strMeasure17,
-            strMeasure18 = meal.strMeasure18,
-            strMeasure19 = meal.strMeasure19,
-            strMeasure20 = meal.strMeasure20,
-            strSource = meal.strSource,
-            dateModifed = meal.dateModifed
+            strMealThumb = meal.strMealThumb
         )
 
-        markViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(MarkViewModel::class.java)
-        markViewModel.insert(mealsMark)
+        markViewModel = markViewModel()
+        markViewModel.isMarkList(mealsMark, mealsMark.idMeal)
+        markViewModel.getExists().observe(this, Observer {
+            if (it) {
+                mark_food.text = "Unmark"
+                setSnackBar("Added ${mealsMark.strMeal}")
+            } else {
+                mark_food.text = "Mark"
+                setSnackBar("Remove ${mealsMark.strMeal}")
+            }
+        })
     }
 
-    private fun setToast(message : String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    private fun isMarked(meal: Meal) {
+        markViewModel = markViewModel()
+        markViewModel.checkIdMeals(meal.idMeal!!.toInt())
+        markViewModel.getCheck().observe(this, Observer {
+            if (it) {
+                mark_food.text = "Mark"
+            } else {
+                mark_food.text = "Unmark"
+            }
+        })
+    }
+
+    private fun setSnackBar(message: String) {
+        Snackbar.make(details_cordinator, message, Snackbar.LENGTH_SHORT).setTextColor(Color.WHITE).setAnchorView(bottom_bar_details).show()
     }
 
     private fun setupTheme() {

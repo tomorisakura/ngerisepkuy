@@ -9,8 +9,9 @@ import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Dessert
 import kotlinx.android.synthetic.main.list_item_banner.view.*
 
-class HomeAdapter(var food : ArrayList<Dessert>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
+    private var food : ArrayList<Dessert> = arrayListOf()
     private var onItemClickCallback : OnItemClickCallback? = null
 
     interface OnItemClickCallback {
@@ -43,7 +44,7 @@ class HomeAdapter(var food : ArrayList<Dessert>) : RecyclerView.Adapter<HomeAdap
     inner class HomeViewHolder(mView : View) : RecyclerView.ViewHolder(mView) {
         fun bind(f : Dessert) {
             with(itemView) {
-                Glide.with(itemView.context).load(f.strMealThumb).placeholder(R.drawable.ic_tomat_placeholder_xx).override(200,200).into(food_img)
+                Glide.with(itemView.context).load(f.strMealThumb).placeholder(R.drawable.tomato_placeholder).override(200,200).into(food_img)
                 name_food.text = f.strMeal
                 itemView.setOnClickListener { onItemClickCallback?.onItemClicked(f) }
             }
