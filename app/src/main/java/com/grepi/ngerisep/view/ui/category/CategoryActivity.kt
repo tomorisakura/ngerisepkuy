@@ -27,7 +27,7 @@ class CategoryActivity : AppCompatActivity() {
         const val mObject_pasta = "string_pasta"
     }
 
-    private lateinit var categoryAdapter: CategoryAdapter
+    private var categoryAdapter: CategoryAdapter = CategoryAdapter()
     private lateinit var categoryViewModel: CategoryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mBeef)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -73,7 +73,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mVege)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -90,7 +90,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mBreakfast)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -107,7 +107,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mChicken)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -124,7 +124,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mSide)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -141,7 +141,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mStarter)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -158,7 +158,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mLamb)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -175,7 +175,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mVegan)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {
@@ -192,7 +192,7 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.fetchCategoryFood(mPasta)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
                     progress_category.visibility = View.GONE
-                    categoryAdapter = CategoryAdapter(it)
+                    categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
                     categoryAdapter.setOnClickItem(object : CategoryAdapter.OnItemClickCallBack {

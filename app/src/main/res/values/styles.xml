@@ -18,4 +18,11 @@
         <item name="windowNoTitle">false</item>
     </style>
 
+    <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">@color/colorGrevy</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="colorControlNormal">@color/colorGrey</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
 </resources>

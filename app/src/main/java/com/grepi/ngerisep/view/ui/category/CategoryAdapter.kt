@@ -9,8 +9,9 @@ import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.CategoryFood
 import kotlinx.android.synthetic.main.list_item_category.view.*
 
-class CategoryAdapter(private var meals : ArrayList<CategoryFood>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
+    private var meals : ArrayList<CategoryFood> = arrayListOf()
     private var onClickItemCallBack : OnItemClickCallBack? = null
 
     interface OnItemClickCallBack {
@@ -19,6 +20,12 @@ class CategoryAdapter(private var meals : ArrayList<CategoryFood>) : RecyclerVie
 
     fun setOnClickItem(onItemClicked : OnItemClickCallBack) {
         this.onClickItemCallBack = onItemClicked
+    }
+
+    internal fun addItems(category : ArrayList<CategoryFood>) {
+        meals.clear()
+        meals.addAll(category)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
@@ -40,7 +47,7 @@ class CategoryAdapter(private var meals : ArrayList<CategoryFood>) : RecyclerVie
     inner class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(mFood : CategoryFood) {
             with(itemView) {
-                Glide.with(context).load(mFood.strMealThumb).placeholder(R.drawable.ic_tomat_placeholder_xx).into(food_img_category)
+                Glide.with(context).load(mFood.strMealThumb).placeholder(R.drawable.tomato_placeholder).into(food_img_category)
                 cat_food.text = mFood.strMeal
                 setOnClickListener { onClickItemCallBack?.onItemClicked(mFood) }
             }

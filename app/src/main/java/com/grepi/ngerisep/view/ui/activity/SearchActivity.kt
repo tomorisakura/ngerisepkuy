@@ -18,9 +18,8 @@ class SearchActivity : AppCompatActivity() {
         const val mObject ="object"
     }
 
-    lateinit var searchViewModel : SearchViewModel
-    lateinit var searchAdapter: SearchAdapter
-    private var meal : ArrayList<Meal> = arrayListOf()
+    private lateinit var searchViewModel : SearchViewModel
+    private var searchAdapter: SearchAdapter = SearchAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,6 @@ class SearchActivity : AppCompatActivity() {
     private fun setObservableSearch() {
         val mData = intent.getStringExtra(mObject)
         rv_search.layoutManager = GridLayoutManager(this, 2)
-        searchAdapter = SearchAdapter(meal)
         rv_search.adapter = searchAdapter
         searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
         searchViewModel.fetchSearchFood(mData!!, this)

@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -193,8 +194,13 @@ class DetailsActivity : AppCompatActivity() {
 
         btn_youtube.setOnClickListener {
             val mIntent = Intent(Intent.ACTION_VIEW)
-            mIntent.data = Uri.parse(meal.strYoutube)
-            startActivity(mIntent)
+            val mealTutorial = meal.strYoutube
+            if (!mealTutorial.isNullOrEmpty()) {
+                mIntent.data = Uri.parse(meal.strYoutube)
+                startActivity(mIntent)
+            } else {
+                setSnackBar("Sorry the link tutorial is broken")
+            }
         }
 
         mark_food.setOnClickListener {
@@ -216,10 +222,14 @@ class DetailsActivity : AppCompatActivity() {
         markViewModel.getExists().observe(this, Observer {
             if (it) {
                 mark_food.text = "Unmark"
-                setSnackBar("Added ${mealsMark.strMeal}")
+                mark_food.setTextColor(Color.WHITE)
+                mark_food.background = ContextCompat.getDrawable(applicationContext ,R.drawable.bg_button_unmark)
+                setSnackBar("Added ${mealsMark.strMeal} \uD83E\uDDE1")
             } else {
                 mark_food.text = "Mark"
-                setSnackBar("Remove ${mealsMark.strMeal}")
+                mark_food.setTextColor(Color.BLACK)
+                mark_food.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_button_mark)
+                setSnackBar("Remove ${mealsMark.strMeal} \uD83E\uDD28")
             }
         })
     }
@@ -230,8 +240,12 @@ class DetailsActivity : AppCompatActivity() {
         markViewModel.getCheck().observe(this, Observer {
             if (it) {
                 mark_food.text = "Mark"
+                mark_food.setTextColor(Color.BLACK)
+                mark_food.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_button_mark)
             } else {
                 mark_food.text = "Unmark"
+                mark_food.setTextColor(Color.WHITE)
+                mark_food.background = ContextCompat.getDrawable(applicationContext ,R.drawable.bg_button_unmark)
             }
         })
     }
