@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -45,6 +44,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         tvName = view.findViewById(R.id.profile_name)
         tvPassion = view.findViewById(R.id.profile_passion)
         edit_button.setOnClickListener(this)
+    }
+
+    private fun setPrefrencesLayout() {
+
     }
 
     private fun customDioalog() {

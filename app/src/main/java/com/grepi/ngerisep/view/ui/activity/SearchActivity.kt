@@ -25,6 +25,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         val mData = intent.getSerializableExtra(mObject)
+        setSupportActionBar(toolbar_search)
         supportActionBar?.title = "Searching '${mData}'"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupTheme()

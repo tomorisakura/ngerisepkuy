@@ -19,6 +19,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.view.ui.activity.SearchActivity
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlin.system.exitProcess
 
 class HomeActivity : AppCompatActivity() {
@@ -30,6 +31,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+        supportActionBar?.hide()
+        setSupportActionBar(toolbar)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(

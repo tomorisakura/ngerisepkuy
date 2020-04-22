@@ -18,17 +18,18 @@
 
         <ImageView
             android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@drawable/ic_img_empty"/>
 
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:lineSpacingExtra="5dp"
             android:layout_marginTop="8dp"
             android:textAlignment="center"
+            android:textColor="@color/colorGrey"
             android:text="@string/empty_text"/>
 
     </LinearLayout>

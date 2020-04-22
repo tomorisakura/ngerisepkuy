@@ -33,6 +33,7 @@ class CategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
+        setSupportActionBar(toolbar_category)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupTheme()
         prepareParcelable()

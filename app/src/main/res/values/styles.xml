@@ -14,8 +14,8 @@
         <item name="colorPrimaryDark">@color/colorWhite</item>
         <item name="colorAccent">@color/colorGrevy</item>
         <item name="android:textSize">@dimen/text_size</item>
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="fontFamily">@font/bitter_regular</item>
     </style>
 

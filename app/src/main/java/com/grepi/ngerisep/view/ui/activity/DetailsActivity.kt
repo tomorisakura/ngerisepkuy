@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.entity.MealsMark
@@ -33,11 +35,17 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var markViewModel: MarkViewModel
     private lateinit var mealsMark: MealsMark
+    private lateinit var cd : CollapsingToolbarLayout
+    private var condition : Boolean = true
+    private var range = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_popular)
         setupTheme()
+        setSupportActionBar(toolbar_details)
+        cd = findViewById(R.id.collapsing_details)
+        cd.setStatusBarScrimColor(Color.WHITE)
         supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.toolbar_bg))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setObservableData()
@@ -59,6 +67,22 @@ class DetailsActivity : AppCompatActivity() {
         when {
             mItem is Dessert -> {
                 supportActionBar?.title = mItem.strMeal
+                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener{ appBarLayout, verticalOffset ->
+
+                    when {
+                        range == -1 -> {
+                            range = appBarLayout?.totalScrollRange!!
+                        }
+                        range + verticalOffset == 0 -> {
+                            cd.title = mItem.strMeal
+                            condition = true
+                        }
+                        condition -> {
+                            cd.title = " "
+                            condition = false
+                        }
+                    }
+                })
                 homeViewModel.fetchMealsbyId(mItem.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     if (it.isEmpty()) {
@@ -74,6 +98,22 @@ class DetailsActivity : AppCompatActivity() {
             }
             mItem2 is Seafod -> {
                 supportActionBar?.title = mItem2.strMeal
+                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener{ appBarLayout, verticalOffset ->
+
+                    when {
+                        range == -1 -> {
+                            range = appBarLayout?.totalScrollRange!!
+                        }
+                        range + verticalOffset == 0 -> {
+                            cd.title = mItem2.strMeal
+                            condition = true
+                        }
+                        condition -> {
+                            cd.title = " "
+                            condition = false
+                        }
+                    }
+                })
                 homeViewModel.fetchMealsbyId(mItem2.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -89,6 +129,22 @@ class DetailsActivity : AppCompatActivity() {
             }
             mSearch is Meal -> {
                 supportActionBar?.title = mSearch.strMeal
+                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener{ appBarLayout, verticalOffset ->
+
+                    when {
+                        range == -1 -> {
+                            range = appBarLayout?.totalScrollRange!!
+                        }
+                        range + verticalOffset == 0 -> {
+                            cd.title = mSearch.strMeal
+                            condition = true
+                        }
+                        condition -> {
+                            cd.title = " "
+                            condition = false
+                        }
+                    }
+                })
                 homeViewModel.fetchMealsbyId(mSearch.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -105,6 +161,22 @@ class DetailsActivity : AppCompatActivity() {
 
             mMisce is Miscellaneous -> {
                 supportActionBar?.title = mMisce.strMeal
+                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener{ appBarLayout, verticalOffset ->
+
+                    when {
+                        range == -1 -> {
+                            range = appBarLayout?.totalScrollRange!!
+                        }
+                        range + verticalOffset == 0 -> {
+                            cd.title = mMisce.strMeal
+                            condition = true
+                        }
+                        condition -> {
+                            cd.title = " "
+                            condition = false
+                        }
+                    }
+                })
                 homeViewModel.fetchMealsbyId(mMisce.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -121,6 +193,22 @@ class DetailsActivity : AppCompatActivity() {
 
             mCategory is CategoryFood -> {
                 supportActionBar?.title = mCategory.strMeal
+                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener{ appBarLayout, verticalOffset ->
+
+                    when {
+                        range == -1 -> {
+                            range = appBarLayout?.totalScrollRange!!
+                        }
+                        range + verticalOffset == 0 -> {
+                            cd.title = mCategory.strMeal
+                            condition = true
+                        }
+                        condition -> {
+                            cd.title = " "
+                            condition = false
+                        }
+                    }
+                })
                 homeViewModel.fetchMealsbyId(mCategory.idMeal)
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
@@ -137,6 +225,22 @@ class DetailsActivity : AppCompatActivity() {
 
             mKey is MealsMark -> {
                 supportActionBar?.title = mKey.strMeal
+                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener{ appBarLayout, verticalOffset ->
+
+                    when {
+                        range == -1 -> {
+                            range = appBarLayout?.totalScrollRange!!
+                        }
+                        range + verticalOffset == 0 -> {
+                            cd.title = mKey.strMeal
+                            condition = true
+                        }
+                        condition -> {
+                            cd.title = " "
+                            condition = false
+                        }
+                    }
+                })
                 homeViewModel.fetchMealsbyId(mKey.idMeal.toString())
                 homeViewModel.getMealsById().observe(this, Observer {
                     for (i in it.indices) {
