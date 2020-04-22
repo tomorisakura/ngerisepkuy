@@ -86,6 +86,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bg_mini_rounded_category"
                 android:padding="3dp"
+                android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/det_name"
                 tools:text="Ayam Goyeng" />
@@ -436,6 +437,7 @@
             android:background="@drawable/bg_button_watch"
             android:textColor="@color/colorWhite"
             android:textAllCaps="false"
+            android:textSize="11sp"
             android:text="@string/watch_text"
             tools:ignore="ButtonStyle" />
 
