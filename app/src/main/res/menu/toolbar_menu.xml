@@ -5,7 +5,11 @@
         <item android:icon="@drawable/ic_search_black_24dp"
             android:title="@string/app_name"
             android:id="@+id/search_icon"
-            app:actionViewClass="android.widget.SearchView"
-            app:showAsAction="withText|always"/>
+            app:actionViewClass="androidx.appcompat.widget.SearchView"
+            app:showAsAction="ifRoom|collapseActionView"/>
+        <item android:icon="@drawable/ic_filter_vintage_black_24dp"
+            android:title="@string/settings_text"
+            android:id="@+id/about_icon"
+            app:showAsAction="ifRoom|collapseActionView"/>
     </group>
 </menu>

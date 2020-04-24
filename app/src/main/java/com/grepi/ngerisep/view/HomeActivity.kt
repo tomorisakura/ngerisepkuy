@@ -7,12 +7,11 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.SearchView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -20,7 +19,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.view.ui.activity.SearchActivity
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlin.system.exitProcess
 
 class HomeActivity : AppCompatActivity() {
 
@@ -47,9 +45,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu?.findItem(R.id.search_icon)?.actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {

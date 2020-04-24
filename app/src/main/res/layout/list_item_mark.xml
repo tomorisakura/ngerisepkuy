@@ -35,19 +35,21 @@
                     tools:text="Nasi Padang"/>
 
                 <TextView
-                    android:layout_marginTop="12dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:id="@+id/mark_category"
-                    tools:text="Vegetable"/>
-
-                <TextView
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/mark_area"
                     tools:text="Indonesian"/>
+
+                <TextView
+                    android:layout_marginTop="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/pastel_yellow"
+                    android:id="@+id/mark_category"
+                    tools:text="Vegetable"/>
+
             </LinearLayout>
         </LinearLayout>
 

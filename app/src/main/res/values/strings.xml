@@ -16,7 +16,7 @@
     <string name="mark_text">Mark</string>
     <string name="search_hint">Mo cari resep apa nich ?</string>
     <string name="misscellaneous_text">Miscellaneous Recipes</string>
-    <string name="empty_text">Aww kamu belum menambahkan resep\n ayo temukan resep favorite dan mulai memasak</string>
+    <string name="empty_text">Aww your bin is empty , lets find some recipes</string>
     <string name="dummy_name">Your Name</string>
     <string name="dummy_passion">Your Passion</string>
     <string name="settings_text">Settings</string>

@@ -10,6 +10,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import com.grepi.ngerisep.model.FoodResponse
 import com.grepi.ngerisep.model.Meal
@@ -36,7 +37,12 @@ class SearchViewModel : ViewModel() {
                         }
                         mealList.postValue(meal)
                     } else {
-                        Toast.makeText(context, "Resep tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        MaterialAlertDialogBuilder(context)
+                            .setTitle("Failed")
+                            .setMessage("cannot find a recipes like '${query}'")
+                            .setPositiveButton("Close") { dialogInterface, _ ->
+                                dialogInterface.dismiss()
+                            }.show()
                     }
                 }
 

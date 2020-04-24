@@ -3,6 +3,7 @@ package com.grepi.ngerisep.view.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -33,6 +34,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     ): View? {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+        setHasOptionsMenu(true)
         return root
     }
 
@@ -42,6 +44,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
         createRecyclerFooter()
         createMisceRecyclerView()
         prepareButtonCategory()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val item = menu.findItem(R.id.about_icon)
+        item?.isVisible = false
     }
 
     private fun prepareButtonCategory() {

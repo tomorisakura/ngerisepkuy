@@ -3,6 +3,7 @@ package com.grepi.ngerisep.view.ui.wishlist
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -27,12 +28,21 @@ class MarkFragment : Fragment() {
     ): View? {
         markViewModel = ViewModelProviders.of(this).get(MarkViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_mark, container, false)
+        setHasOptionsMenu(true)
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRvMark()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val item = menu.findItem(R.id.search_icon)
+        val about = menu.findItem(R.id.about_icon)
+        item?.isVisible = false
+        about?.isVisible = false
     }
 
     private fun setRvMark() {

@@ -66,8 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/recipes_text"
-                android:textSize="22sp"
+                tools:text="@string/recipes_text"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,6 +78,8 @@
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
                 android:layout_marginEnd="20dp"
+                android:textColor="@color/black_90"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/category_dessert"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
@@ -108,9 +110,11 @@
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="20dp"
                 android:background="#E8E8E8"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/area_dessert" />
@@ -392,9 +396,11 @@
             <View
                 android:id="@+id/view3"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="50dp"
                 android:background="#E8E8E8"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bahan_20" />
@@ -418,6 +424,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:paddingBottom="100dp"
+                android:textColor="@color/black_90"
+                android:fontFamily="@font/rubik_light"
                 android:textSize="15sp"
                 android:lineSpacingExtra="5sp"
                 app:layout_constraintEnd_toEndOf="parent"

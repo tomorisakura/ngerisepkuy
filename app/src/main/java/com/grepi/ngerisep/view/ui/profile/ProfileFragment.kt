@@ -6,11 +6,13 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.grepi.ngerisep.R
@@ -35,6 +37,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     ): View? {
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profil, container, false)
+        setHasOptionsMenu(true)
         return root
     }
 
@@ -46,47 +49,45 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         edit_button.setOnClickListener(this)
     }
 
-    private fun setPrefrencesLayout() {
-
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val item = menu.findItem(R.id.search_icon)
+        item?.isVisible = false
     }
 
     private fun customDioalog() {
         val mView = layoutInflater.inflate(R.layout.dialog_edit, null)
-        val alertDialog = AlertDialog.Builder(activity)
-        alertDialog.setTitle("Change Profile")
-        alertDialog.setView(mView)
-        alertDialog.setCancelable(false)
-
         val name = mView.findViewById<TextInputLayout>(R.id.edt_name)
         val passion = mView.findViewById<TextInputLayout>(R.id.edt_passion)
         val mName = name.editText?.text
         val mPassion = passion.editText?.text
 
-        alertDialog.setNegativeButton("Cancel") { dialog, i ->
-            dialog.cancel()
-        }
-        alertDialog.setPositiveButton("Save") { dialog, i ->
-            //shared
-            val editor = sharedPreferences.edit()
-            if (mName.isNullOrEmpty() && mPassion.isNullOrEmpty()) {
-                editor.putString(mKeyName, "Hai Kosong \uD83D\uDE04")
-                editor.putString(mKeyPassion, "kosong ?")
-                editor.apply()
-                setSnackBar("masukin nama dan passion yang keren ya \uD83D\uDE04")
-                dialog.run {
-                    setShared()
-                }
-            } else {
-                editor.putString(mKeyName, mName.toString())
-                editor.putString(mKeyPassion, mPassion.toString())
-                editor.apply()
-                setSnackBar("Saved ❤")
-                dialog.run {
-                    setShared()
-                }
+        MaterialAlertDialogBuilder(context)
+            .setTitle("Customize Profile")
+            .setView(mView)
+            .setNegativeButton("Close") { dialogInterface, i ->
+                dialogInterface.cancel()
             }
-        }
-        alertDialog.create().show()
+            .setPositiveButton("Save"){ dialogInterface, i ->
+                val editor = sharedPreferences.edit()
+                if (mName.isNullOrEmpty() && mPassion.isNullOrEmpty()) {
+                    editor.putString(mKeyName, "Hai Kosong \uD83D\uDE04")
+                    editor.putString(mKeyPassion, "kosong ?")
+                    editor.apply()
+                    setSnackBar("masukin nama dan passion yang keren ya \uD83D\uDE04")
+                    dialogInterface.run {
+                        setShared()
+                    }
+                } else {
+                    editor.putString(mKeyName, mName.toString())
+                    editor.putString(mKeyPassion, mPassion.toString())
+                    editor.apply()
+                    setSnackBar("Saved ❤")
+                    dialogInterface.run {
+                        setShared()
+                    }
+                }
+            }.create().show()
     }
 
     private fun setShared() {

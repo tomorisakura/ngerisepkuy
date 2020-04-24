@@ -17,15 +17,12 @@
         android:theme="@style/greviTheme">
         <activity android:name=".view.ui.category.CategoryActivity"></activity>
         <activity
-            android:name=".view.ui.activity.SearchActivity"
-            android:screenOrientation="portrait" />
+            android:name=".view.ui.activity.SearchActivity"/>
         <activity
-            android:name=".view.ui.activity.DetailsActivity"
-            android:screenOrientation="portrait" />
+            android:name=".view.ui.activity.DetailsActivity"/>
         <activity
             android:name=".view.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:screenOrientation="portrait" />
+            android:label="@string/title_activity_home"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

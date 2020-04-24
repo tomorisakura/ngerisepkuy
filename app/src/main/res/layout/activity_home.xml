@@ -32,7 +32,7 @@
         android:foregroundTint="@color/colorGrevy"
         app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:itemIconTint="@color/colorGrey"
-        app:labelVisibilityMode="selected"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
     <fragment
