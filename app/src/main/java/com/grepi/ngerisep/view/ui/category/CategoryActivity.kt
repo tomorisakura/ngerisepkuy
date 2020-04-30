@@ -38,6 +38,9 @@ class CategoryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupTheme()
         prepareParcelable()
+        refresh_category.setOnRefreshListener {
+            prepareParcelable()
+        }
     }
 
     private fun prepareParcelable() {
@@ -55,9 +58,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mBeef
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mBeef)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -72,9 +76,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mVege
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mVege)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -89,9 +94,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mBreakfast
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mBreakfast)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -106,9 +112,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mChicken
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mChicken)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -123,9 +130,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mSide
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mSide)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -140,9 +148,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mStarter
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mStarter)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -157,9 +166,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mLamb
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mLamb)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -174,9 +184,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mVegan
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mVegan)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 
@@ -191,9 +202,10 @@ class CategoryActivity : AppCompatActivity() {
                 supportActionBar?.title = mPasta
                 rv_category.layoutManager = GridLayoutManager(this, 2)
                 categoryViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel::class.java)
+                refresh_category.isRefreshing = true
                 categoryViewModel.fetchCategoryFood(mPasta)
                 categoryViewModel.getCategoryFood().observe(this, Observer {
-                    progress_category.visibility = View.GONE
+                    refresh_category.isRefreshing = false
                     categoryAdapter.addItems(it)
                     rv_category.adapter = categoryAdapter
 

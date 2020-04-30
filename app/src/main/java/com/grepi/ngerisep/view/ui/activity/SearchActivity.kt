@@ -31,6 +31,9 @@ class SearchActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupTheme()
         setObservableSearch()
+        refresh_swipe.setOnRefreshListener {
+            setObservableSearch()
+        }
     }
 
     private fun setObservableSearch() {
@@ -38,15 +41,16 @@ class SearchActivity : AppCompatActivity() {
         rv_search.layoutManager = GridLayoutManager(this, 2)
         rv_search.adapter = searchAdapter
         searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
+        refresh_swipe.isRefreshing = true
         searchViewModel.fetchSearchFood(mData!!, this)
         searchViewModel.getSearchFood().observe(this, Observer {
             if (!it.isNullOrEmpty()) {
                 img_notfound.visibility = View.GONE
-                progress_search.visibility = View.GONE
+                refresh_swipe.isRefreshing = false
                 searchAdapter.addItem(it)
             }else {
                 img_notfound.visibility = View.VISIBLE
-                progress_search.visibility = View.VISIBLE
+                refresh_swipe.isRefreshing = true
             }
         })
         searchAdapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback{
