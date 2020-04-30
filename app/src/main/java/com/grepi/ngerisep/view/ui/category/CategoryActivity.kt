@@ -8,6 +8,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.CategoryFood
 import com.grepi.ngerisep.view.ui.activity.DetailsActivity

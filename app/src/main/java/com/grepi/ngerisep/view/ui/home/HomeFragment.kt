@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Dessert
 import com.grepi.ngerisep.model.Miscellaneous
@@ -26,6 +27,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private var homeAdapter : HomeAdapter = HomeAdapter()
     private var footerAdapter: FooterAdapter = FooterAdapter()
     private var miscellaneousAdapter: MiscellaneousAdapter = MiscellaneousAdapter()
+    private lateinit var refreshLayout : SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onRefreshLayout(view)
         createRecyclerView()
         createRecyclerFooter()
         createMisceRecyclerView()
@@ -50,6 +53,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onPrepareOptionsMenu(menu)
         val item = menu.findItem(R.id.about_icon)
         item?.isVisible = false
+    }
+
+    private fun onRefreshLayout(view: View) {
+        refreshLayout = view.findViewById(R.id.refresh_home)
+        refreshLayout.setOnRefreshListener {
+            createRecyclerView()
+            createRecyclerFooter()
+            createMisceRecyclerView()
+            prepareButtonCategory()
+        }
     }
 
     private fun prepareButtonCategory() {
@@ -68,11 +81,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
         rv_item_banner.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         rv_item_banner.adapter = homeAdapter
         homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        refreshLayout.isRefreshing = true
         homeViewModel.fetchData()
         homeViewModel.getMeals().observe(this.viewLifecycleOwner, Observer { p->
             homeAdapter.addItems(p)
             shimmer_banner.stopShimmerAnimation()
             shimmer_banner.visibility = View.GONE
+            refreshLayout.isRefreshing = false
         })
 
         homeAdapter.setOnClickCallback(object : HomeAdapter.OnItemClickCallback {
@@ -87,11 +102,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
         rv_footer.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         rv_footer.adapter = footerAdapter
         homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        refreshLayout.isRefreshing = true
         homeViewModel.fetchSeafood()
         homeViewModel.getSeafood().observe(this.viewLifecycleOwner, Observer { item ->
             footerAdapter.addItem(item)
             shimmer_banner_footer.stopShimmerAnimation()
             shimmer_banner_footer.visibility = View.GONE
+            refreshLayout.isRefreshing = false
         })
 
         footerAdapter.setOnItemClickCallback(object : FooterAdapter.OnItemClickCallback{
@@ -106,9 +123,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
         rv_missce.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         rv_missce.adapter = miscellaneousAdapter
         homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        refreshLayout.isRefreshing = true
         homeViewModel.fetchMisceFood()
         homeViewModel.getMisceFood().observe(this.viewLifecycleOwner, Observer {
             miscellaneousAdapter.addMisce(it)
+            refreshLayout.isRefreshing = false
         })
 
         miscellaneousAdapter.setOnCLickItem(object : MiscellaneousAdapter.OnItemCLickCallBack {

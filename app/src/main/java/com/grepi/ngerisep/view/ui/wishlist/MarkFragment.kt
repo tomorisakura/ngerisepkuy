@@ -34,6 +34,7 @@ class MarkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onRefreshLayout()
         setRvMark()
     }
 
@@ -49,9 +50,11 @@ class MarkFragment : Fragment() {
         rv_mark.layoutManager = LinearLayoutManager(activity)
         rv_mark.setHasFixedSize(true)
         markViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MarkViewModel::class.java)
+        refresh_mark.isRefreshing = true
         markViewModel.fetchMeals().observe(this.viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
                 empty_content.visibility = View.GONE
+                refresh_mark.isRefreshing = false
                 markAdapter.addItem(it)
                 rv_mark.adapter = markAdapter
 
@@ -62,10 +65,17 @@ class MarkFragment : Fragment() {
 
                 })
             } else {
+                refresh_mark.isRefreshing = false
                 markAdapter.addItem(it)
                 empty_content.visibility = View.VISIBLE
             }
         })
+    }
+
+    private fun onRefreshLayout() {
+        refresh_mark.setOnRefreshListener {
+            setRvMark()
+        }
     }
 
     private fun prepareDetails(meal: MealsMark) {
