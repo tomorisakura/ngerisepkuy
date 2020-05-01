@@ -2,7 +2,6 @@ package com.grepi.ngerisep.view.ui.activity
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,6 +31,7 @@ class SearchViewModel : ViewModel() {
                 override fun onResponse(response: JSONObject?) {
                     mealResponse = GsonBuilder().create().fromJson(response.toString(), FoodResponse::class.java)
                     if (!mealResponse.meals.isNullOrEmpty()) {
+                        meal.clear()
                         mealResponse.meals.forEach {
                             meal.add(it)
                         }
@@ -48,6 +48,12 @@ class SearchViewModel : ViewModel() {
 
                 override fun onError(anError: ANError?) {
                     Log.e("_responseFailure", anError.toString())
+                    MaterialAlertDialogBuilder(context)
+                        .setTitle("Request Time Out")
+                        .setMessage("Lets try again to find a '${query}'")
+                        .setPositiveButton("Close") { dialogInterface, _ ->
+                            dialogInterface.dismiss()
+                        }.show()
                 }
             })
     }

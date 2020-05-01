@@ -26,6 +26,7 @@ class CategoryViewModel : ViewModel() {
             .getAsJSONObject(object : JSONObjectRequestListener{
                 override fun onResponse(response: JSONObject?) {
                     mFoodResponse = GsonBuilder().create().fromJson(response.toString(), CategoryFoodResponse::class.java)
+                    mFood.clear()
                     mFoodResponse.meals.forEach {
                         mFood.add(it)
                     }

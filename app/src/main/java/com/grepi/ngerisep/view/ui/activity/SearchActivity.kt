@@ -8,7 +8,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.grepi.ngerisep.R
 import com.grepi.ngerisep.model.Meal
 import kotlinx.android.synthetic.main.activity_search.*
@@ -47,10 +46,10 @@ class SearchActivity : AppCompatActivity() {
             if (!it.isNullOrEmpty()) {
                 img_notfound.visibility = View.GONE
                 refresh_swipe.isRefreshing = false
+                supportActionBar?.title = "Found '${mData}'"
                 searchAdapter.addItem(it)
             }else {
                 img_notfound.visibility = View.VISIBLE
-                refresh_swipe.isRefreshing = true
             }
         })
         searchAdapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback{

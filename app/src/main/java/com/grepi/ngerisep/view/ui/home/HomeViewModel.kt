@@ -44,6 +44,7 @@ class HomeViewModel : ViewModel() {
             .getAsJSONObject( object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
                     dessertResponse = GsonBuilder().create().fromJson(response.toString(), DessertResponse::class.java)
+                    dessert.clear()
                     for (i in dessertResponse.meals.indices) {
                         dessert.add(dessertResponse.meals[i])
                     }
@@ -68,6 +69,7 @@ class HomeViewModel : ViewModel() {
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
                     seafoodResponse = GsonBuilder().create().fromJson(response.toString(), SeafoodResponse::class.java)
+                    seafod.clear()
                     for (i in seafoodResponse.meals.indices) {
                         seafod.add(seafoodResponse.meals[i])
                     }
@@ -93,6 +95,7 @@ class HomeViewModel : ViewModel() {
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
                     meals = GsonBuilder().create().fromJson(response.toString(), FoodResponse::class.java)
+                    food.clear()
                     for (i in meals.meals.indices) {
                         food.add(meals.meals[i])
                     }
@@ -117,6 +120,7 @@ class HomeViewModel : ViewModel() {
             .getAsJSONObject(object : JSONObjectRequestListener{
                 override fun onResponse(response: JSONObject?) {
                     miscellaneousResponse = GsonBuilder().create().fromJson(response.toString(), MiscellaneousResponse::class.java)
+                    miscelaneous.clear()
                     miscellaneousResponse.meals.forEach {
                         miscelaneous.add(it)
                     }
