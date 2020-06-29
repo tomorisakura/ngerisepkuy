@@ -6,7 +6,7 @@
 <h5>Overview</h5>
 
 ![ss preview](https://github.com/tomorisakura/ngerisepkuy/blob/master/app/src/main/res/drawable-v24/ss_preview.png)
-<p>this not ended, it will be updated soon 😸</p>
+<p>if you want to try this this <a href="https://github.com/tomorisakura/ngerisepkuy/blob/master/app/release/app-release.apk">app</a> 😸</p>
 <h5>What i use ?</h5>
 
 <ul style="none">
