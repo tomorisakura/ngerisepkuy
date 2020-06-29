@@ -80,9 +80,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private fun createRecyclerView() {
         rv_item_banner.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         rv_item_banner.adapter = homeAdapter
-        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         refreshLayout.isRefreshing = true
-        homeViewModel.fetchData()
         homeViewModel.getMeals().observe(this.viewLifecycleOwner, Observer { p->
             homeAdapter.addItems(p)
             shimmer_banner.stopShimmerAnimation()
@@ -101,9 +100,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private fun createRecyclerFooter() {
         rv_footer.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         rv_footer.adapter = footerAdapter
-        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         refreshLayout.isRefreshing = true
-        homeViewModel.fetchSeafood()
         homeViewModel.getSeafood().observe(this.viewLifecycleOwner, Observer { item ->
             footerAdapter.addItem(item)
             shimmer_banner_footer.stopShimmerAnimation()
@@ -122,7 +120,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private fun createMisceRecyclerView() {
         rv_missce.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         rv_missce.adapter = miscellaneousAdapter
-        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         refreshLayout.isRefreshing = true
         homeViewModel.fetchMisceFood()
         homeViewModel.getMisceFood().observe(this.viewLifecycleOwner, Observer {

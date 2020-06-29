@@ -63,7 +63,7 @@ class DetailsActivity : AppCompatActivity() {
         val mMisce = intent.getParcelableExtra<Miscellaneous>(mObject_misce)
         val mCategory = intent.getParcelableExtra<CategoryFood>(mObject_category)
         val mKey = intent.getParcelableExtra<MealsMark>(mKey_entity)
-        homeViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         when {
             mItem is Dessert -> {
                 supportActionBar?.title = mItem.strMeal
@@ -83,8 +83,7 @@ class DetailsActivity : AppCompatActivity() {
                         }
                     }
                 })
-                homeViewModel.fetchMealsbyId(mItem.idMeal)
-                homeViewModel.getMealsById().observe(this, Observer {
+                homeViewModel.getMealsById(mItem.idMeal).observe(this, Observer {
                     if (it.isEmpty()) {
                         progress_popular.visibility = View.VISIBLE
                     }else {
@@ -114,8 +113,7 @@ class DetailsActivity : AppCompatActivity() {
                         }
                     }
                 })
-                homeViewModel.fetchMealsbyId(mItem2.idMeal)
-                homeViewModel.getMealsById().observe(this, Observer {
+                homeViewModel.getMealsById(mItem2.idMeal).observe(this, Observer {
                     for (i in it.indices) {
                         if (it.isEmpty()) {
                             progress_popular.visibility = View.VISIBLE
@@ -145,8 +143,7 @@ class DetailsActivity : AppCompatActivity() {
                         }
                     }
                 })
-                homeViewModel.fetchMealsbyId(mSearch.idMeal)
-                homeViewModel.getMealsById().observe(this, Observer {
+                homeViewModel.getMealsById(mSearch.idMeal).observe(this, Observer {
                     for (i in it.indices) {
                         if (it.isEmpty()) {
                             progress_popular.visibility = View.VISIBLE
@@ -177,8 +174,7 @@ class DetailsActivity : AppCompatActivity() {
                         }
                     }
                 })
-                homeViewModel.fetchMealsbyId(mMisce.idMeal)
-                homeViewModel.getMealsById().observe(this, Observer {
+                homeViewModel.getMealsById(mMisce.idMeal).observe(this, Observer {
                     for (i in it.indices) {
                         if (it.isEmpty()) {
                             progress_popular.visibility = View.VISIBLE
@@ -209,8 +205,7 @@ class DetailsActivity : AppCompatActivity() {
                         }
                     }
                 })
-                homeViewModel.fetchMealsbyId(mCategory.idMeal)
-                homeViewModel.getMealsById().observe(this, Observer {
+                homeViewModel.getMealsById(mCategory.idMeal).observe(this, Observer {
                     for (i in it.indices) {
                         if (it.isEmpty()) {
                             progress_popular.visibility = View.VISIBLE
@@ -241,8 +236,7 @@ class DetailsActivity : AppCompatActivity() {
                         }
                     }
                 })
-                homeViewModel.fetchMealsbyId(mKey.idMeal.toString())
-                homeViewModel.getMealsById().observe(this, Observer {
+                homeViewModel.getMealsById(mKey.idMeal.toString()).observe(this, Observer {
                     for (i in it.indices) {
                         if (it.isEmpty()) {
                             progress_popular.visibility = View.VISIBLE

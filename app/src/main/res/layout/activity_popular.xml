@@ -55,7 +55,7 @@
             <ProgressBar
                 android:id="@+id/progress_popular"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 app:layout_constraintBottom_toTopOf="@+id/view2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -460,7 +460,8 @@
             android:background="@drawable/bg_button_watch"
             android:textColor="@color/colorWhite"
             android:textAllCaps="false"
-            android:textSize="11sp"
+            android:textSize="12sp"
+            android:padding="10dp"
             android:text="@string/watch_text"
             tools:ignore="ButtonStyle" />
 
